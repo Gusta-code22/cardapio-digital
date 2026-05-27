@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio Semanal</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -18,7 +19,7 @@
 <!-- data inicio da semana -->
 <p>
     <b>Início da semana:</b>
-    <span th:text="${semanaCardapio.dataInicioSemana}"></span>
+    <span th:text="${#temporals.format(semanaCardapio.dataInicioSemana, 'dd/MM')}"></span>
 </p>
 
 <!-- lista de dias -->
@@ -26,7 +27,7 @@
 
     <div th:each="cardapio : ${semanaCardapio.dias}" class="card">
 
-        <div class="data" th:text="${cardapio.data}"></div>
+        <div class="data" th:text="${#temporals.format(cardapio.data, 'dd/MM')}"></div>
 
         <div class="campo">
             <span class="label">Dia da semana:</span>

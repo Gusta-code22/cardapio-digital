@@ -2,10 +2,6 @@ spring:
   application:
     name: cardapio-escolar
 
-  admin:
-    username: diretora
-    password: cadastro123
-
   datasource:
     url: jdbc:postgresql://localhost:5432/cardapio_digital
     username: gustavo
@@ -18,3 +14,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+admin:
+  username: diretora
+  password: cadastro123
