@@ -19,8 +19,6 @@ target/
 *.iml
 *.ipr
 
-application-local.yml
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

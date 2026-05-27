@@ -1,15 +1,26 @@
 spring:
-
   application:
     name: cardapio-escolar
 
-  profiles:
-    active: local
+  # Mantive suas credenciais de admin aqui, mas se quiser protegê-las depois,
+  # pode usar o mesmo esquema de chaves (ex: ${ADMIN_PASSWORD:cadastro123})
+  admin:
+    username: ${ADMIN_USERNAME}
+    password: ${ADMIN_PASSWORD}
+
+  datasource:
+    url: ${SUPABASE_URL}
+    username: ${SUPABASE_USER}
+    password: ${SUPABASE_PASSWORD}
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false # Desativado para não poluir os logs do Render em produção
     properties:
       hibernate:
         format_sql: true
+
+# Configuração da porta dinâmica que o Render exige para o Docker
+server:
+  port: ${PORT:8080}
