@@ -21,6 +21,6 @@ spring:
       hibernate:
         format_sql: true
 
-# Configuração da porta dinâmica que o Render exige para o Docker
+# Configuração da porta dinâmica que o Render exige para o Dock
 server:
   port: ${PORT:8080}
