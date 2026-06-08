@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Merenda Digital</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body class="home-page">
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro/claro" title="Modo escuro/claro">
+    <span class="theme-icon">🌙</span>
+</button>
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Cardápio diário</p>
+        <h1>Cardápio do dia</h1>
+        <p class="info-chip" th:text="${dataHoje}">27 de maio de 2026</p>
+    </div>
+</div>
+
+<div class="hero-card">
+    <div th:if="${cardapio == null}" class="empty-state">
+        <p>Hoje não há cardápio disponível. Aproveite o seu final de semana! 😊</p>
+    </div>
+
+    <div th:if="${cardapio != null}" class="cardapio-content">
+        <div class="cardapio-badge">
+            <div class="badge-title" th:text="${diaHojeFormatado}">Segunda-feira</div>
+            <small th:text="${#temporals.format(cardapio.data, 'dd/MM/yyyy')}">27/05/2026</small>
+        </div>
+
+        <div class="meal-group">
+            <h3>Lanche da manhã</h3>
+            <p th:text="${cardapio.lanche}"></p>
+        </div>
+
+        <div class="meal-group">
+            <h3>Almoço</h3>
+            <p th:text="${cardapio.almoco}"></p>
+        </div>
+
+        <div class="meal-group">
+            <h3>Lanche da tarde</h3>
+            <p th:text="${cardapio.lancheTarde}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="home-actions">
+    <a href="/semana" class="btn btn-secondary">Ver cardápio da semana</a>
+    <a href="/admin" class="btn">Acesso Administrativo</a>
+</div>
+
+<footer class="page-footer">
+    <p><small>⚠️ O cardápio está sujeito a alterações. Consulte o painel administrativo para verificar as atualizações mais recentes.</small></p>
+</footer>
+
+<script src="/js/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,824 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E VARIÁVEIS (Base do Design Sofisticado)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-primary: #fcfbf9;
+    --text-main: #2c2927;
+    --text-muted: #6e6762;
+    --accent-color: #4a6b53; /* Verde oliva sofisticado */
+    --accent-light: #f0f4f1;
+    --card-bg: #ffffff;
+    --border-color: #e8e5e0;
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 10px 30px rgba(74, 107, 83, 0.08);
+    --radius: 12px;
+
+    /* Sobrecarga de Variáveis do Bootstrap 5 para o modo Admin */
+    --bs-primary: #4a6b53;
+    --bs-primary-rgb: 74, 107, 83;
+    --bs-body-bg: #fcfbf9;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --text-main: #f0f0f0;
+    --text-muted: #b0b0b0;
+    --accent-color: #7eb68d;
+    --accent-light: #2a3d2f;
+    --card-bg: #242424;
+    --border-color: #3a3a3a;
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 30px rgba(126, 182, 141, 0.15);
+    --bs-body-bg: #1a1a1a;
+}
+
+/* Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-main);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-subtle);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.home-page,
+body.admin-dashboard {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.page-header .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.page-header h1 {
+    font-size: clamp(2rem, 2.4vw, 3rem);
+    margin: 0;
+}
+
+.info-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 10px 16px;
+    background: var(--accent-light);
+    border: 1px solid rgba(74, 107, 83, 0.15);
+    border-radius: 999px;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.hero-card,
+.today-widget {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-subtle);
+    padding: 28px;
+    margin-bottom: 30px;
+}
+
+.cardapio-badge,
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.cardapio-badge .badge-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: capitalize;
+}
+
+.cardapio-badge small {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.meal-group {
+    margin-bottom: 22px;
+}
+
+.meal-group h3 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.meal-group p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-main);
+}
+
+.empty-state {
+    padding: 26px 18px;
+    border-radius: 16px;
+    background: #f7f8f5;
+    border: 1px dashed var(--border-color);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: center;
+}
+
+[data-theme="dark"] .empty-state {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.home-actions,
+.dashboard-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    align-items: stretch;
+}
+
+.btn-secondary {
+    background-color: #ffffff !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: var(--shadow-subtle) !important;
+}
+
+.dashboard-grid a {
+    width: 100%;
+}
+
+.dashboard-grid button {
+    min-height: 58px;
+}
+
+/* Fallback para páginas sem Bootstrap */
+body:not(.bg-light) {
+    padding: 40px 20px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   CABEÇALHO E INFOS GERAIS
+   ========================================================================== */
+h1, .card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 24px;
+}
+
+h1 span {
+    color: var(--accent-color);
+}
+
+.text-primary {
+    color: var(--accent-color) !important;
+}
+
+/* Info de data / Início da semana / Dia atual / Data do cardápio */
+body > p:first-of-type,
+p:has(b),
+div[th\:if*="null"] ~ div > p:first-of-type {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-subtle);
+    font-weight: 600;
+}
+
+div[th\:if*="null"] ~ div > p:first-of-type {
+    color: var(--accent-color);
+    background: var(--accent-light);
+    border-color: transparent;
+}
+
+p b {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Mensagens de aviso/vazio e Erros Nativos */
+div[th\:if*="null"] p,
+div[th\:if*="mensagemErro"] {
+    text-align: center;
+    padding: 20px;
+    background: #fdf2f2;
+    border-radius: var(--radius);
+    border: 1px solid #facdcd;
+    color: #de3333;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+div[th\:if*="mensagemErro"] p {
+    margin: 0;
+}
+
+/* Alertas do Bootstrap customizados */
+.alert-danger {
+    background-color: #fdf2f2;
+    border-color: #facdcd;
+    color: #de3333;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Títulos internos de seções de formulários */
+h3 {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--accent-light);
+    padding-bottom: 6px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 24px 0 32px 0;
+}
+
+div[th\:each*="dia"] + hr,
+div[th\:each*="dia"] > hr {
+    display: none;
+}
+
+/* ==========================================================================
+   TELA 1: LAYOUT EM GRID (Cardápio Semanal)
+   ========================================================================== */
+div:has(> .card:not(.border-0)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.card:not(.border-0) {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:not(.border-0):hover {
+    transform: translateY(-4px);
+    border-color: rgba(74, 107, 83, 0.2);
+    box-shadow: var(--shadow-hover);
+}
+
+.card .data {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-light);
+}
+
+.campo {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.campo:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.campo span:not(.label) {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   TELA 2: LINHA DO TEMPO / TIMELINE (Cardápio do Dia)
+   ========================================================================= */
+div[th\:if*="null"] ~ div:has(h3) {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow-subtle);
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+div[th\:if*="null"] ~ div h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    margin-top: 16px;
+    position: relative;
+    padding-left: 20px;
+}
+
+div[th\:if*="null"] ~ div h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+div[th\:if*="null"] ~ div h3 + p {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    font-weight: 500;
+    margin-bottom: 24px;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent-light);
+}
+
+div[th\:if*="null"] ~ div p:last-of-type {
+    margin-bottom: 0;
+    border-left-color: transparent;
+}
+
+/* ==========================================================================
+   TELA 6: PAINEL PRINCIPAL ADMIN (Dashboard de Links Nativos)
+   ========================================================================== */
+.admin-dashboard .today-widget {
+    margin-bottom: 30px;
+}
+
+.admin-dashboard .today-widget h2 {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    color: var(--accent-color);
+}
+
+.admin-dashboard .admin-top-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 1.35fr) minmax(260px, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 30px;
+}
+
+.admin-dashboard .today-widget {
+    padding: 30px;
+}
+
+.admin-dashboard .today-widget .section-header {
+    margin-bottom: 22px;
+}
+
+.admin-dashboard .today-widget .subtext,
+.admin-dashboard .quick-actions .subtext {
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-size: 0.95rem;
+    max-width: 420px;
+}
+
+.admin-dashboard .action-cards {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-dashboard .action-card,
+.admin-dashboard .dashboard-card {
+    display: block;
+    padding: 22px 20px;
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--text-main);
+    text-decoration: none;
+    box-shadow: var(--shadow-subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.admin-dashboard .action-card:hover,
+.admin-dashboard .dashboard-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(74, 107, 83, 0.2);
+    box-shadow: var(--shadow-hover);
+}
+
+.admin-dashboard .action-card.primary-card {
+    background: linear-gradient(135deg, #4a6b53 0%, #5f7e62 100%);
+    color: #ffffff;
+    border: none;
+}
+
+.admin-dashboard .action-card.primary-card small {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.admin-dashboard .action-card.secondary-card {
+    background: #f5f3ef;
+    color: var(--text-main);
+}
+
+[data-theme="dark"] .admin-dashboard .action-card.secondary-card {
+    background: #2a2a2a;
+    color: var(--text-main);
+}
+
+.admin-dashboard .action-card span {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.admin-dashboard .action-card small {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+.admin-dashboard .quick-actions {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.admin-dashboard .toolbar-cards {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-dashboard .today-widget .cardapio-badge {
+    justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+    .admin-dashboard .admin-top-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .admin-dashboard .page-header,
+    .admin-dashboard .today-widget,
+    .admin-dashboard .quick-actions {
+        padding: 24px;
+    }
+    .admin-dashboard .info-chip {
+        width: fit-content;
+    }
+}
+
+.admin-dashboard .action-card span {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.admin-dashboard .action-card small {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.admin-dashboard .action-card.primary-card small {
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+.admin-dashboard .action-card.primary-card {
+    padding: 26px 22px;
+}
+
+/* ==========================================================================
+   FORMULÁRIOS & COMPONENTES DE ENTRADA
+   ========================================================================== */
+form:has(textarea),
+form:has(select) {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow-subtle);
+}
+
+form > div:first-of-type:has(input[type="date"]) {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 300px;
+}
+
+div[th\:each*="dia"] {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+div[th\:each*="dia"] div:has(textarea) {
+    grid-column: span 2;
+}
+
+form div:has(input),
+form div:has(select),
+form div:has(textarea) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control,
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main) !important;
+    background-color: var(--card-bg) !important;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    resize: vertical;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236e6762' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-control:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 4px rgba(74, 107, 83, 0.15) !important;
+}
+
+textarea {
+    min-height: 80px;
+}
+
+/* ==========================================================================
+   BOTÕES, LINKS E NAVEGAÇÃO (Unificados para Tags <a>, <button> e Classes)
+   ========================================================================== */
+button,
+button[type="submit"],
+a:not(.btn-link):not([href*="buscar-para-editar"]),
+.btn-primary {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px !important; /* Ligeiramente maior para o painel */
+    background-color: var(--accent-color) !important;
+    border: 1px solid var(--accent-color) !important;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(74, 107, 83, 0.12) !important;
+}
+
+form > button[type="submit"] {
+    margin-top: 12px;
+}
+
+button:hover,
+button[type="submit"]:hover,
+.btn-primary:hover,
+a:not(.btn-link):not([href*="buscar-para-editar"]):hover {
+    background-color: #3b5441 !important;
+    border-color: #3b5441 !important;
+    box-shadow: 0 6px 16px rgba(74, 107, 83, 0.22) !important;
+}
+
+button:active,
+button[type="submit"]:active,
+.btn-primary:active,
+a:not(.btn-link):not([href*="buscar-para-editar"]):active {
+    transform: scale(0.98) !important;
+}
+
+/* Estilo Secundário / Outline para botões de navegação comum do painel */
+a[href="/semana"] button,
+a[href="/admin/dia/buscar-para-editar"] button {
+    background-color: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-subtle) !important;
+}
+
+a[href="/semana"] button:hover,
+a[href="/admin/dia/buscar-para-editar"] button:hover {
+    background-color: #fcfbf9 !important;
+    border-color: var(--text-muted) !important;
+}
+
+/* Estilo Terciário/Discreto para o botão de voltar à Home absoluta */
+a[href="/"] button {
+    background-color: transparent !important;
+    color: var(--text-muted) !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+}
+
+a[href="/"] button:hover {
+    color: var(--text-main) !important;
+    background-color: #f5f3ef !important;
+}
+
+/* Links em formato textuais puros (Cancelamentos) */
+.btn-link.text-muted,
+a[href*="buscar-para-editar"]:not(:has(button)) {
+    display: inline-flex;
+    margin-top: 16px;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: var(--text-muted) !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    justify-content: center;
+}
+
+.btn-link.text-muted:hover,
+a[href*="buscar-para-editar"]:not(:has(button)):hover {
+    color: var(--text-main) !important;
+}
+
+/* Limpeza de espaçadores brutos do HTML */
+br {
+    display: none;
+}
+
+.page-footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background: #fef9f6;
+    border: 1px solid #f0e8e1;
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+[data-theme="dark"] .page-footer {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.page-footer p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.page-footer small {
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 600px) {
+    div[th\:each*="dia"] {
+        grid-template-columns: 1fr;
+    }
+    div[th\:each*="dia"] div:has(textarea) {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    body:not(.bg-light) {
+        padding: 24px 16px;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    form:has(textarea),
+    form:has(select),
+    div[th\:if*="null"] ~ div:has(h3) {
+        padding: 20px;
+    }
+    body:not(.bg-light):has(a[href*="/semana/novo"]) br ~ a {
+        grid-template-columns: 1fr; /* Força botões empilhados 100% no celular */
+    }
+}

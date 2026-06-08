@@ -1,0 +1,10 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cardapio_digital
+    username: gustavo
+    password: 12345
+
+admin:
+  username: diretora
+  password: cadastro123

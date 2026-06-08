@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Dia por Data</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Editar Cardápio - <span th:text="${diaCardapio.diaSemana}">SEGUNDA-FEIRA</span></h1>
+<p>Data do Cardápio: <span th:text="${#temporals.format(diaCardapio.data, 'dd/MM/yyyy')}">01/01/2026</span></p>
+
+<div th:if="${mensagemErro}" style="color: red; font-weight: bold;">
+    <p th:text="${mensagemErro}"></p>
+</div>
+
+<form th:action="@{/admin/dia/editar-por-data/{data}(data=${diaCardapio.data})}" th:object="${diaCardapio}" method="POST">
+
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{data}" />
+    <input type="hidden" th:field="*{diaSemana}" />
+
+    <div>
+        <label>Almoço:</label>
+        <textarea th:field="*{almoco}" rows="4" cols="50" required></textarea>
+    </div>
+
+    <div>
+        <label>Lanche da Manhã:</label>
+        <textarea th:field="*{lanche}" rows="4" cols="50" required></textarea>
+    </div>
+
+    <div>
+        <label>Lanche da Tarde:</label>
+        <textarea th:field="*{lancheTarde}" rows="4" cols="50" required></textarea>
+    </div>
+
+    <br/>
+    <button type="submit">Salvar Alterações</button>
+    <a th:href="@{/admin/dia/buscar-para-editar}">Cancelar</a>
+</form>
+</body>
+</html>

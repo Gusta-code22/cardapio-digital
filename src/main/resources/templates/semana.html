@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio Semanal</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro/claro" title="Modo escuro/claro">
+    <span class="theme-icon">🌙</span>
+</button>
+
+<h1>Cardápio da Semana</h1>
+
+<!-- data inicio da semana -->
+<p>
+    <b>Início da semana:</b>
+    <span th:text="${semanaCardapio.dataInicioSemana}"></span>
+</p>
+
+<!-- lista de dias -->
+<div th:if="${semanaCardapio != null}">
+
+    <div th:each="cardapio : ${semanaCardapio.dias}" class="card">
+
+        <div class="data" th:text="${cardapio.data}"></div>
+
+        <div class="campo">
+            <span class="label">Dia da semana:</span>
+            <span th:text="${cardapio.diaSemanaFormatado}"></span>
+        </div>
+
+        <div class="campo">
+            <span class="label">Almoço:</span>
+            <span th:text="${cardapio.almoco}"></span>
+        </div>
+
+        <div class="campo">
+            <span class="label">Lanche:</span>
+            <span th:text="${cardapio.lanche}"></span>
+        </div>
+
+        <div class="campo">
+            <span class="label">Lanche da tarde:</span>
+            <span th:text="${cardapio.lancheTarde}"></span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- caso não exista cardápio -->
+<div th:if="${semanaCardapio == null}">
+    <p>Não há cardápio disponível para esta semana.</p>
+</div>
+
+<a href="/">Voltar</a>
+
+<footer class="page-footer">
+    <p><small>⚠️ O cardápio está sujeito a alterações. Consulte o painel administrativo para verificar as atualizações mais recentes.</small></p>
+</footer>
+
+<script src="/js/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Painel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body class="admin-dashboard">
+
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro/claro" title="Modo escuro/claro">
+    <span class="theme-icon">🌙</span>
+</button>
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Visão rápida</p>
+        <h1>Painel Administrativo</h1>
+        <p class="info-chip" th:text="${hojeFormatado}">27 de maio de 2026</p>
+    </div>
+</div>
+
+<div class="admin-top-grid">
+    <section class="today-widget">
+        <div class="section-header">
+            <div>
+                <h2>Cardápio de hoje</h2>
+                <p class="subtext">Veja o cardápio atualizado e confirme se está correto.</p>
+            </div>
+        </div>
+
+        <div th:if="${cardapioHoje != null}">
+            <div class="cardapio-badge">
+                <div class="badge-title" th:text="${diaHojeFormatado}">Segunda-feira</div>
+                <small th:text="${#temporals.format(cardapioHoje.data, 'dd/MM/yyyy')}">27/05/2026</small>
+            </div>
+
+            <div class="meal-group">
+                <h3>Lanche da manhã</h3>
+                <p th:text="${cardapioHoje.lanche}"></p>
+            </div>
+            <div class="meal-group">
+                <h3>Almoço</h3>
+                <p th:text="${cardapioHoje.almoco}"></p>
+            </div>
+            <div class="meal-group">
+                <h3>Lanche da tarde</h3>
+                <p th:text="${cardapioHoje.lancheTarde}"></p>
+            </div>
+        </div>
+
+        <div th:if="${cardapioHoje == null}" class="empty-state">
+            <p>Não há cardápio cadastrado para hoje.</p>
+        </div>
+    </section>
+
+    <aside class="quick-actions">
+        <div class="section-header">
+            <div>
+                <h2>Ações rápidas</h2>
+                <p class="subtext">Acesse as tarefas mais comuns do administrativo.</p>
+            </div>
+        </div>
+
+        <div class="action-cards">
+            <a href="/admin/semana/novo" class="action-card primary-card">
+                <span>Criar nova semana</span>
+                <small>Cadastre o próximo conjunto de menus escolares.</small>
+            </a>
+            <a href="/admin/dia/buscar-para-editar" class="action-card">
+                <span>Editar cardápio</span>
+                <small>Atualize o cardápio de qualquer data já cadastrada.</small>
+            </a>
+            <a href="/semana" class="action-card">
+                <span>Ver cardápio público</span>
+                <small>Veja como os pais e alunos visualizam o menu.</small>
+            </a>
+            <a href="/" class="action-card secondary-card">
+                <span>Voltar para a home</span>
+                <small>Retorne à página pública de hoje.</small>
+            </a>
+        </div>
+    </aside>
+</div>
+
+<script src="/js/theme-toggle.js"></script>
+</body>
+</html>

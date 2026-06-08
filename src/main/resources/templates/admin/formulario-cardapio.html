@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cardápio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Cadastrar Cardápio da Semana</h1>
+
+<form th:action="@{/admin/cardapio/novo}" th:object="${semanaDTO}" method="POST">
+
+    <div>
+        <label>Data Início da Semana:</label>
+        <input type="date" th:field="*{dataInicioSemana}" required />
+    </div>
+
+    <hr/>
+
+    <h3>Dias do Cardápio</h3>
+
+    <div th:each="dia, stat : *{dias}">
+
+        <h4>Dia #<span th:text="${stat.count}">1</span></h4>
+
+        <div>
+            <label>Data do Dia:</label>
+            <input type="date"
+                   th:field="*{dias[__${stat.index}__].data}"
+                   required />
+        </div>
+
+        <div>
+            <label>Dia da Semana:</label>
+
+            <select th:field="*{dias[__${stat.index}__].diaSemana}">
+
+                <option th:each="enumDia : ${T(java.time.DayOfWeek).values()}"
+                        th:value="${enumDia}"
+                        th:text="${enumDia.getDisplayName(T(java.time.format.TextStyle).FULL, T(java.util.Locale).of('pt','BR'))}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <div>
+            <label>Almoço:</label>
+            <textarea th:field="*{dias[__${stat.index}__].almoco}"></textarea>
+        </div>
+
+        <div>
+            <label>Lanche da Manhã:</label>
+            <textarea th:field="*{dias[__${stat.index}__].lanche}"></textarea>
+        </div>
+
+        <div>
+            <label>Lanche da Tarde:</label>
+            <textarea th:field="*{dias[__${stat.index}__].lancheTarde}"></textarea>
+        </div>
+
+        <hr/>
+
+    </div>
+
+    <button type="submit">Salvar Cardápio</button>
+
+</form>
+
+</body>
+</html>
