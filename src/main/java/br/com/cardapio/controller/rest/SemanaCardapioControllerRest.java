@@ -3,35 +3,92 @@ package br.com.cardapio.controller.rest;
 import br.com.cardapio.domain.SemanaCardapio;
 import br.com.cardapio.dto.SemanaCardapioDTO;
 import br.com.cardapio.service.SemanaCardapioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/semana-rest")
+@RequestMapping("/api/v1/weekly-menu")
 @RequiredArgsConstructor
+@Tag(
+        name = "Weekly Menu",
+        description = "Operations for creating and retrieving weekly school meal menus."
+)
 public class SemanaCardapioControllerRest {
 
     private final SemanaCardapioService service;
 
+    @Operation(
+            summary = "Create a weekly menu",
+            description = "Creates and stores a complete weekly school meal menu."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Weekly menu created successfully"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid request payload"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Unexpected server error"
+            )
+    })
     @PostMapping
-    public ResponseEntity<SemanaCardapio> criarSemana(
-            @RequestBody SemanaCardapioDTO dto
+    public ResponseEntity<SemanaCardapio> createWeeklyMenu(
+
+            @RequestBody(
+                    description = "Weekly menu data containing all daily meal entries.",
+                    required = true,
+                    content = @Content(
+                            schema = @Schema(
+                                    implementation = SemanaCardapioDTO.class
+                            )
+                    )
+            )
+            @org.springframework.web.bind.annotation.RequestBody SemanaCardapioDTO dto
     ) {
 
-        SemanaCardapio semana = service.criarSemanaComDias(dto);
+        SemanaCardapio weeklyMenu = service.criarSemanaComDias(dto);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(semana);
+                .body(weeklyMenu);
     }
 
-    @GetMapping("/atual")
-    public ResponseEntity<SemanaCardapioDTO> mostrarSemana() {
+    @Operation(
+            summary = "Retrieve current weekly menu",
+            description = "Returns the currently active weekly school meal menu."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Weekly menu retrieved successfully"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "No weekly menu found"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Unexpected server error"
+            )
+    })
+    @GetMapping("/current")
+    public ResponseEntity<SemanaCardapioDTO> getCurrentWeeklyMenu() {
 
-        SemanaCardapioDTO semanaDTO = service.buscarCardapioSemana();
+        SemanaCardapioDTO weeklyMenu = service.buscarCardapioSemana();
 
-        return ResponseEntity.ok(semanaDTO);
+        return ResponseEntity.ok(weeklyMenu);
     }
 }
