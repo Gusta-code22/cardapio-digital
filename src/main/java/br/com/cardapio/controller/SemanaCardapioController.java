@@ -22,31 +22,13 @@ public class SemanaCardapioController {
 
     private final SemanaCardapioService service;
 
-
-    @PostMapping
-    public ResponseEntity<SemanaCardapio> criarSemana(
-            @RequestBody SemanaCardapioDTO dto
-    ) {
-        SemanaCardapio semana = service.criarSemanaComDias(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(semana);
-    }
-
-
-    @GetMapping("/semana-atual")
-    public ResponseEntity<SemanaCardapioDTO> mostrarSemana() {
-        SemanaCardapioDTO semanaDTO = service.buscarCardapioSemana();
-        return ResponseEntity.ok(semanaDTO);
-    }
-
     @GetMapping("/semana")
     public String semana(Model model) {
+
         SemanaCardapioDTO semanaDTO = service.buscarCardapioSemana();
 
         model.addAttribute("semanaCardapio", semanaDTO);
 
         return "semana";
     }
-
-
-
 }

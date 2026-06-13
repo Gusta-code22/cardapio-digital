@@ -39,12 +39,6 @@ public class CardapioController {
         return "home";
     }
 
-    @GetMapping("/dia-atual")
-    public ResponseEntity<?> mostrarDia(){
-        LocalDate hoje = LocalDate.now();
-        CardapioDiaDTO cardapioDiaDTO = diaCardapioService.buscarCardapioDoDia(hoje);
-        return ResponseEntity.ok(cardapioDiaDTO);
-    }
 
     private String formatarData(LocalDate data) {
         return data.format(DateTimeFormatter.ofPattern("EEEE, dd 'de' MMMM", new Locale("pt", "BR")));

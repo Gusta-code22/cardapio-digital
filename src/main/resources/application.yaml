@@ -4,6 +4,8 @@ spring:
 
   # Mantive suas credenciais de admin aqui, mas se quiser protegê-las depois,
   # pode usar o mesmo esquema de chaves (ex: ${ADMIN_PASSWORD:cadastro123})
+  profiles:
+    active: local
   admin:
     username: ${ADMIN_USERNAME}
     password: ${ADMIN_PASSWORD}
