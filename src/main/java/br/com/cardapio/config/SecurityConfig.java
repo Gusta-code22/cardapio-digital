@@ -64,7 +64,6 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails admin = User.builder()
                 .username(username)
-                // Usando o encoder para encodar a senha "admin123"
                 .password(passwordEncoder.encode(password))
                 .roles("ADMIN")
                 .build();
